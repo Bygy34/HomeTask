@@ -1,0 +1,135 @@
+﻿@model IList<MotorDeportByDima.Meneger.Entities.OrderUser>
+
+@if (User.IsInRole("driver"))
+{
+    <h2>Новые заказы</h2>
+}
+@if (User.IsInRole("user"))
+{
+    <h2>Созданные вами заказы</h2>
+}
+
+<table class="table">
+    @if (User.IsInRole("driver"))
+    {
+        <tr>
+            <th>
+                Почта пользователя
+            </th>
+            <th>
+                @Html.ActionLink("Тип груза", "FindOrderForDriver", new { sortOrder = ViewBag.ProductNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Начальная точка", "FindOrderForDriver", new { sortOrder = ViewBag.StartAddressSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Конечная точка", "FindOrderForDriver", new { sortOrder = ViewBag.EndAddressSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Вмемя начала", "FindOrderForDriver", new { sortOrder = ViewBag.StartDateSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Время окончания", "FindOrderForDriver", new { sortOrder = ViewBag.DueDateSortParm })
+            </th>
+            >
+        </tr>
+    }
+    @if (User.IsInRole("user"))
+    {
+        <tr>
+            <th>
+                Почта пользователя
+            </th>
+            <th>
+                @Html.ActionLink("Тип груза", "DetailsUserOrderById", new { sortOrder = ViewBag.ProductNameSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Начальная точка", "DetailsUserOrderById", new { sortOrder = ViewBag.StartAddressSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Конечная точка", "DetailsUserOrderById", new { sortOrder = ViewBag.EndAddressSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Вмемя начала", "DetailsUserOrderById", new { sortOrder = ViewBag.StartDateSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Время окончания", "DetailsUserOrderById", new { sortOrder = ViewBag.DueDateSortParm })
+            </th>
+            >
+        </tr>
+    }
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.ApplicationUser.Email
+            </td>
+            <td>
+                @item.ProductName
+            </td>
+            <td>
+                @item.StartAddressCity
+            </td>
+            <td>
+                @item.StartAddressRoad
+            </td>
+            <td>
+                @item.StartAddressHouse
+            </td>
+            <td>
+                @item.EndAddressCity
+            </td>
+            <td>
+                @item.EndAddressRoad
+            </td>
+            <td>
+                @item.EndAddressHouse
+            </td>
+            <td>
+                @item.StartDate.ToString("MM/dd/yyyy")
+            </td>
+            <td>
+                @item.DueDate.ToString("MM/dd/yyyy")
+            </td>
+            @if (User.IsInRole("driver"))
+    {
+        <td>
+            @Html.ActionLink("Принять заказ", "CreateDriverOrder", new { id = item.Id })
+        </td>
+}
+            @if (User.IsInRole("user"))
+    {
+        if (item.Status)
+        {
+            <td>
+                @Html.ActionLink("Удалить", "DeleteUserOrderById", new { id = item.Id })
+            </td>
+            <td>
+                @Html.ActionLink("Корректировать", "UpdateUserOrder", new { id = item.Id })
+            </td>
+}
+else
+{
+        <td>
+            В работе
+        </td>
+        <td>
+            @Html.ActionLink("Детали заказа", "GetOrderDetails", new { id = item.Id })
+        </td>
+}
+}
+            @if (User.IsInRole("admin"))
+    {
+        <td>
+            @Html.ActionLink("Корректировать", "UpdateUserOrder", new { id = item.Id })
+        </td>
+        <td>
+            @Html.ActionLink("Удалить", "DeleteUserOrderById", new { id = item.Id })
+        </td>
+}
+
+        </tr>
+    }
+
+</table>

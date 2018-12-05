@@ -1,0 +1,86 @@
+﻿
+@model List<MotorDeportByDima.Meneger.Entities.Order>
+@{
+    ViewBag.Title = "AllOrdersByUser";
+}
+<h2>Сформированные пользователем заказы </h2>
+
+<table class="table">
+    <caption>Заказчик</caption>
+    <caption>Водитель</caption>
+    <tr>
+
+        <th colspan="6">
+            Заказчик
+        </th>
+        <th colspan="2">
+            Водитель
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <th>
+            Почта заказчика
+        </th>
+        <th>
+            Начальная точка
+        </th>
+        <th>
+            Конечная точка
+        </th>
+        <th>
+            @Html.ActionLink("Время начала", "AllOrders", new { sortOrder = ViewBag.StartDateSortParm })
+        </th>
+        <th>
+            Время окончания
+        </th>
+        <th>
+            Тип груза
+        </th>
+        <th>
+            Почта Водителя
+        </th>
+        <th>
+            @Html.ActionLink("Марка машины", "AllOrders", new { sortOrder = ViewBag.CarBrandSortParm })
+        </th>
+        <th>
+            Статус
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.OrderUser.ApplicationUser.UserName
+            </td>
+            <td>
+                @item.OrderUser.StartAddress
+            </td>
+            <td>
+                @item.OrderUser.EndAddress
+            </td>
+            <td>
+                @item.OrderUser.StartDate.ToString("MM/dd/yyyy")
+            </td>
+            <td>
+                @item.OrderUser.DueDate.ToString("MM/dd/yyyy")
+            </td>
+            <td>
+                @item.OrderUser.ProductName
+            </td>
+            <td>@item.OrderDriver.ApplicationUser.UserName</td>
+            <td>
+                @item.OrderDriver.CarBrand
+            </td>
+            <td>
+                @item.Status
+            </td>
+            <th>
+                @Html.ActionLink("Следующий шаг", "UpdateOrder", new { id = item.Id })
+            </th>
+        </tr>
+    }
+
+</table>

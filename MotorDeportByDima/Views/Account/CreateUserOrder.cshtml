@@ -1,0 +1,107 @@
+﻿@model MotorDeportByDima.Models.CreateUserOrder
+
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<h2>Регистрация Заказчика</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary()
+        <div class="form-group">
+            <p>Начальная точка</p>
+            <label class="control-label col-md-2">Город:  </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartAddressCity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartAddressCity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Улица:  </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartAddressRoad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartAddressRoad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Дом: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartAddressHouse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartAddressHouse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p>Место назначения</p>
+            <label class="control-label col-md-2"> Город: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndAddressCity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndAddressCity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Улица: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndAddressRoad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndAddressRoad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Дом: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndAddressHouse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndAddressHouse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Тип груза </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Вес, кг</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Weight, new { htmlAttributes = new { @class = "form-control" } })
+                <label></label>
+                @Html.ValidationMessageFor(model => model.Weight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Время начала</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Выполнить до </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DueDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Регистрация" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

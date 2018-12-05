@@ -1,0 +1,107 @@
+﻿
+@model IList<MotorDeportByDima.Meneger.Entities.OrderDriver>
+
+
+
+@if (User.IsInRole("user"))
+{
+    <h2>Новые заказы</h2>
+}
+@if (User.IsInRole("driver"))
+{
+    <h2>Созданные вами заказы</h2>
+}
+
+<table class="table">
+    @if (User.IsInRole("user"))
+    {
+        <tr>
+            <th>
+                Имя пользователя
+            </th>
+            <th>
+                @Html.ActionLink("Марка машины", "DetailsDriverOrderById", new { sortOrder = ViewBag.CarBrandSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Максимальная грузоподъёмность, кг", "DetailsDriverOrderById", new { sortOrder = ViewBag.MaxWeightSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Текущее местоположение", "DetailsDriverOrderById", new { sortOrder = ViewBag.StartAddressSortParm })
+            </th>
+        </tr>
+    }
+    @if (User.IsInRole("driver"))
+    {
+        <tr>
+            <th>
+                Имя пользователя
+            </th>
+            <th>
+                @Html.ActionLink("Марка машины", "FindOrderForUser", new { sortOrder = ViewBag.CarBrandSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("максимальная грузоподёмность ,кг", "FindOrderForUser", new { sortOrder = ViewBag.MaxWeightSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Текущее местоположение", "FindOrderForUser", new { sortOrder = ViewBag.StartAddressSortParm })
+            </th>
+        </tr>
+    }
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.ApplicationUser.Email
+            </td>
+            <td>
+                @item.CarBrand
+            </td>
+            <td>
+                @item.MaxWeight
+            </td>
+            <td>
+                @item.StartAddress
+            </td>
+
+            @if (User.IsInRole("user"))
+            {
+                <td>
+                    @Html.ActionLink("Принять заказ", "CreateUserOrder", new { id = item.Id })
+                </td>
+            }
+            @if (User.IsInRole("driver"))
+            {
+                if (item.Status)
+                {
+                    <td>
+                        @Html.ActionLink("Корректировать", "UpdateDriverOrder", new { id = item.Id })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Удалить", "DeleteDriverOrderById", new { id = item.Id })
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        В работе
+                    </td>
+                    <td>
+                        @Html.ActionLink("Детали заказа", "GetOrderDetails", new { id = item.Id })
+                    </td>
+                }
+            }
+            @if (User.IsInRole("admin"))
+            {
+                <td>
+                    @Html.ActionLink("Корректировать", "UpdateDriverOrder", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Удалить", "DeleteDriverOrderById", new { id = item.Id })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
+

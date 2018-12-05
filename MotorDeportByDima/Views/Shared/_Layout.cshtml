@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – Супер пупер</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top containermy">
+        <div class="container ">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @*@Html.ActionLink("Имя приложения", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav mynav">
+                    <li>@Html.ActionLink("Главная страница", "Index", "Home")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        if (User.IsInRole("driver"))
+                        {
+                            <li>@Html.ActionLink("Создать заказ", "CreateDriverOrder", "Account")</li>
+                            <li>@Html.ActionLink("Созданные заказы", "DetailsDriverOrderById", "Account")</li>
+                            <li>@Html.ActionLink("Найти заказ", "FindOrderForDriver", "Account")</li>
+
+                        }
+
+                        if (User.IsInRole("user"))
+                        {
+                            <li>@Html.ActionLink("Сoздать заказ", "CreateUserOrder", "Account")</li>
+                            <li>@Html.ActionLink("Созданные заказы", "DetailsUserOrderById", "Account")</li>
+                            <li>@Html.ActionLink("Найти заказ", "FindOrderForUser", "Account")</li>
+                        }
+                        <li>@Html.ActionLink("Заказы в работе", "AllOrdersByUser", "Account")</li>
+                    }
+
+
+                </ul>
+                @Html.Partial("_LoginPartial")
+                @if (User.IsInRole("admin"))
+                {
+                    @Html.Partial("AdminPartial")
+                }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="container body-content my-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year – приложение ASP.NET созданное Димой для тестовых целей  @Html.ActionLink("Вызвать ошибку", "Contact", "Home")</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <link href="~/Content/MyStyle.css" rel="stylesheet" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+﻿@model MotorDeportByDima.Models.CreateDriverOrder
+
+@{
+                ViewBag.Title = "Регистрация";
+}
+
+<h2>Регистрация Bодителя</h2>
+
+@using (Html.BeginForm())
+{
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p>Местонахождение автомобиля </p>
+            <label class="control-label col-md-2">Город: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartAddressCity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartAddressCity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Улица: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartAddressRoad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartAddressRoad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Дом: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartAddressHouse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartAddressHouse, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Максимальная грузоподёмность ,кг </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxWeight, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MaxWeight, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Марка автомобиля </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CarBrand, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CarBrand, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Регистрация" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

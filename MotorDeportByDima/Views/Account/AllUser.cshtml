@@ -1,0 +1,48 @@
+﻿@model List<MotorDeportByDima.Meneger.Entities.ApplicationUser>
+@{
+    ViewBag.Title = "AllUser";
+}
+
+<h2>Все зарегестрированные пользователи</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Emeil", "AllUser", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            @Html.ActionLink("UserName", "AllUser", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            Количество заявок водителя:
+        </th>
+        <th>
+            Количество заявок заказчика:
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Email
+            </td>
+            <td>
+                @item.UserName
+            </td>
+            <td>
+                @item.OrderDriver.Count
+            </td>
+            <td>
+                @item.OrderUser.Count
+            </td>
+            <td>
+                @Html.ActionLink("Заблокировать", "BlockUser", new { email = item.Email })
+            </td>
+
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,82 @@
+﻿@model List<MotorDeportByDima.Meneger.Entities.Order>
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Сформированные заказы</h2>
+
+<table class="table">
+    <tr>
+        <th colspan="6">
+            Заказчик
+        </th>
+        <th colspan="3">
+            Водитель
+        </th>
+        <th>
+            Статус
+        </th>
+
+    </tr>
+
+    <tr>
+        <th>
+            Почта заказчика
+        </th>
+        <th>
+            Начальная точка
+        </th>
+        <th>
+            Конечная точка
+        </th>
+        <th>
+            @Html.ActionLink("Вмемя начала", "AllOrders", new { sortOrder = ViewBag.StartDateSortParm })            
+        </th>
+        <th>
+            Время окончания
+        </th>
+        <th>
+            Тип груза
+        </th>
+        <th>
+            Почта Водителя
+        </th>
+        <th>
+            @Html.ActionLink("Марка машины", "AllOrders", new { sortOrder = ViewBag.CarBrandSortParm })
+            
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @item.OrderUser.ApplicationUser.UserName
+        </td>
+        <td>
+            @item.OrderUser.StartAddress
+        </td>
+        <td>
+            @item.OrderUser.EndAddress
+        </td>
+        <td>
+            @item.OrderUser.StartDate
+        </td>
+        <td>
+            @item.OrderUser.DueDate
+        </td>
+        <td>
+            @item.OrderUser.ProductName
+        </td>
+        <td>
+            @item.OrderDriver.ApplicationUser.UserName
+        </td>
+        <td>
+            @item.OrderDriver.CarBrand
+        </td>
+        <td>
+            @item.Status
+        </td>
+    </tr>
+    }
+
+</table>
